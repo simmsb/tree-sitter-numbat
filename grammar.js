@@ -261,9 +261,16 @@ module.exports = grammar({
       $.factorial,
       $.unicode_power,
       $.call,
+      $.list_expression,
       $._parenthesized_expression,
       $._primary,
     ),
+
+    list_expression: $ => seq(
+      "[",
+      optional(seq($._expression, repeat(seq(",", $._expression)))),
+      "]"
+                ),
 
     //! postfix_apply   →   condition ( "//" identifier ) *
     postfix_apply: $ => prec.right(PREC.postfix_apply, seq(
