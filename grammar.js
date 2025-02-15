@@ -53,6 +53,7 @@ module.exports = grammar({
       $.variable_decl,
       $.function_decl,
       $.dimension_decl,
+      $.struct_decl,
       $.decorator,
       $.unit_decl,
       $.module_import,
@@ -140,6 +141,23 @@ module.exports = grammar({
         "=",
         $.dimension_expr
       ))
+    ),
+
+    struct_decl: $ => seq(
+      "struct", 
+      field("name", $.identifier),
+      "{",
+      field("fields",
+        optional(
+          seq(
+            $.identifier, ":", $.dimension_expr,
+            repeat(seq(
+              ",", $.identifier, ":", $.dimension_expr
+            ))
+          )
+        )
+      ),
+      "}"
     ),
 
 
