@@ -123,22 +123,103 @@ fn to_fahrenheit(t_kelvin: Temperature) -> Scalar = (t_kelvin / kelvin) / scale_
         (identifier)))))
 
 ================================================================================
-Function definition with struct in body
+Function definition multiline
 ================================================================================
-
-fn foo(x) =
-  Foo { y: y } 
-  where y = x
+fn foo(
+  a: Voltage,
+  b: Voltage) -> Voltage = a
 
 --------------------------------------------------------------------------------
-
 (source_file
  (function_decl
   (identifier)
   (identifier)
+  (dimension_expr
+   (identifier))
+  (identifier)
+  (dimension_expr
+   (identifier))
+  (type_annotation
+   (dimension_expr
+    (identifier)))
+  (identifier)))
+================================================================================
+Function definition with struct in body
+================================================================================
+
+fn calc_fb_resistors(
+  a: Voltage, b: Voltage,
+  c: Voltage,
+  d: Voltage) -> ThreeWayDivider =
+  ThreeWayDivider {
+    r_a: fb_r_a,
+    r_b: r_b,
+    r_c: r_c
+  }
+  where alpha = (opamp_v_max - opamp_v_min) / (v_out_max - v_out_min)
+    and r_c = fb_r_a * alpha
+    and r_b = fb_vref / (((v_out_max - fb_vref) / fb_r_a) + ((opamp_v_min - fb_vref) / r_c))
+
+--------------------------------------------------------------------------------
+(source_file
+ (function_decl
+  (identifier)
+  (identifier)
+  (dimension_expr
+   (identifier))
+  (identifier)
+  (dimension_expr
+   (identifier))
+  (identifier)
+  (dimension_expr
+   (identifier))
+  (identifier)
+  (dimension_expr
+   (identifier))
+  (type_annotation
+   (dimension_expr
+    (identifier)))
   (struct_expression
    (identifier)
    (identifier)
+   (identifier)
+   (identifier)
+   (identifier)
+   (identifier)
    (identifier))
-  (identifier)
-  (identifier)))
+(identifier)
+        (factor
+         (term
+          (identifier)
+          (minus)
+          (identifier))
+         (divide)
+         (term
+          (identifier)
+          (minus)
+          (identifier)))
+(identifier)
+        (factor
+         (identifier)
+         (multiply)
+         (identifier))
+(identifier)
+        (factor
+         (identifier)
+         (divide)
+         (term
+          (factor
+           (term
+            (identifier)
+            (minus)
+            (identifier))
+           (divide)
+           (identifier))
+          (plus)
+          (factor
+           (term
+            (identifier)
+            (minus)
+            (identifier))
+           (divide)
+           (identifier))))))

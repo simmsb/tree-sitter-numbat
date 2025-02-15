@@ -25,6 +25,23 @@ const PREC = {
   unicode_power: 2,
   call: 1,
   primary: 0,
+};
+
+function *intersperse(a, delim) {
+  let first = true;
+  for (const x of a) {
+    if (!first) yield delim;
+    first = false;
+    yield x;
+  }
+}
+
+function nlseq(...rules) {
+  return seq(...intersperse(rules, optional(/\r?\n/)));
+}
+
+function nlseq1(...rules) {
+  return seq(optional(/\r?\n/), ...intersperse(rules, optional(/\r?\n/)));
 }
 
 
@@ -35,11 +52,11 @@ module.exports = grammar({
 
   reserved: {
     global: _ => [
-      'let', 'struct', 'where'
+      'let', 'struct', 'where', 'and'
     ],
   },
 
-  conflicts: $ => [[$.function_decl]],
+  conflicts: $ => [[$.function_decl], [$.struct_decl]],
 
   externals: $ => [
     $._string_content,
@@ -131,14 +148,14 @@ module.exports = grammar({
     //! fn_decl_param   →   "(" ( identifier ( ":" dimension_expr ) ? "," )* ( identifier ( ":" dimension_expr ) ) ? ")"
     _fn_decl_param: $ => seq(
       "(",
-      repeat(seq(
+      repeat(nlseq1(
         $.identifier,
-        optional(seq(":", $.dimension_expr)),
+        optional(nlseq(":", $.dimension_expr)),
         ",",
       )),
-      optional(seq(
+      optional(nlseq1(
         $.identifier,
-        optional(seq(":", $.dimension_expr)),
+        optional(nlseq(":", $.dimension_expr)),
       )),
       ")",
     ),
@@ -154,15 +171,15 @@ module.exports = grammar({
       ))
     ),
 
-    struct_decl: $ => seq(
+    struct_decl: $ => nlseq(
       "struct", 
       field("name", $.identifier),
       "{",
       field("fields",
         optional(
-          seq(
+          nlseq(
             $.identifier, ":", $.dimension_expr,
-            repeat(seq(
+            repeat(nlseq(
               ",", $.identifier, ":", $.dimension_expr
             ))
           )
@@ -302,13 +319,12 @@ module.exports = grammar({
       "]"
                 ),
 
-    struct_expression: $ => seq(
-      $.identifier,
-      "{",
-      optional(seq(
+    struct_expression: $ => nlseq(
+      seq($.identifier, "{"),
+      optional(nlseq(
         $.identifier, ":", $._expression,
         repeat(
-          seq(
+          nlseq(
             ",", $.identifier, ":", $._expression,
           )
         )
