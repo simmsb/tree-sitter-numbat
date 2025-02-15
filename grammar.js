@@ -280,6 +280,7 @@ module.exports = grammar({
       $.unicode_power,
       $.call,
       $.list_expression,
+      $.struct_expression,
       $._parenthesized_expression,
       $._primary,
     ),
@@ -289,6 +290,20 @@ module.exports = grammar({
       optional(seq($._expression, repeat(seq(",", $._expression)))),
       "]"
                 ),
+
+    struct_expression: $ => seq(
+      $.identifier,
+      "{",
+      optional(seq(
+        $.identifier, ":", $._expression,
+        repeat(
+          seq(
+            ",", $.identifier, ":", $._expression,
+          )
+        )
+      )),
+      "}"
+    ),
 
     //! postfix_apply   →   condition ( "//" identifier ) *
     postfix_apply: $ => prec.right(PREC.postfix_apply, seq(
