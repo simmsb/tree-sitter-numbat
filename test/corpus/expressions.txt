@@ -30,6 +30,7 @@ fact!
 - (1)
 -.65
 ---1
+Foo { bar: 1 }
 
 --------------------------------------------------------------------------------
 
@@ -76,7 +77,11 @@ fact!
   (negate
     (negate
       (negate
-        (number)))))
+        (number))))
+      (struct_expression
+        (identifier)
+        (identifier)
+        (number)))
 
 ================================================================================
 Binary operator expressions

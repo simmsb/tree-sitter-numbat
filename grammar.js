@@ -33,6 +33,14 @@ module.exports = grammar({
 
   extras: $ => [token(" "), $.line_comment],
 
+  reserved: {
+    global: _ => [
+      'let', 'struct', 'where'
+    ],
+  },
+
+  conflicts: $ => [[$.function_decl]],
+
   externals: $ => [
     $._string_content,
     $._float,
@@ -84,30 +92,33 @@ module.exports = grammar({
       )),
       optional(seq(
         "=",
+        optional($._newline),
         field("body", $._expression)
       )),
       optional(seq(
+        optional($._newline),
         "where",
         field("where", seq(
-              field("name", $.identifier),
-              field("type_parameter", optional(seq(":", $.type_annotation))),
-              "=",
-              field("value", $._expression),
-              optional(field("ands", repeat(
-                                          seq("and",
+          field("name", $.identifier),
+          field("type_parameter", optional(seq(":", $.type_annotation))),
+          "=",
+          field("value", $._expression),
+          optional(field("ands", repeat(
+            seq(
+              optional($._newline),
+              "and",
               field("name", $.identifier),
               field("type_parameter", optional(seq(":", $.type_annotation))),
               "=",
               field("value", $._expression)
-                                                )
-                                        )
-
-                                        ))
-
-          
-                                ))
-                        ))
+            )
+          )
+          ))
+        ))
+      ))
     ),
+
+    _newline: _ => /\r?\n/,
 
     //! fn_decl_generic →   "<" ( identifier "," ) * identifier ? ">"
     _fn_decl_generic: $ => seq(

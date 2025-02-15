@@ -121,3 +121,24 @@ fn to_fahrenheit(t_kelvin: Temperature) -> Scalar = (t_kelvin / kelvin) / scale_
         (identifier)
         (minus)
         (identifier)))))
+
+================================================================================
+Function definition with struct in body
+================================================================================
+
+fn foo(x) =
+  Foo { y: y } 
+  where y = x
+
+--------------------------------------------------------------------------------
+
+(source_file
+ (function_decl
+  (identifier)
+  (identifier)
+  (struct_expression
+   (identifier)
+   (identifier)
+   (identifier))
+  (identifier)
+  (identifier)))

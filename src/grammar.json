@@ -219,6 +219,18 @@
                   "value": "="
                 },
                 {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "_newline"
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                },
+                {
                   "type": "FIELD",
                   "name": "body",
                   "content": {
@@ -239,6 +251,18 @@
             {
               "type": "SEQ",
               "members": [
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "_newline"
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                },
                 {
                   "type": "STRING",
                   "value": "where"
@@ -305,6 +329,18 @@
                               "content": {
                                 "type": "SEQ",
                                 "members": [
+                                  {
+                                    "type": "CHOICE",
+                                    "members": [
+                                      {
+                                        "type": "SYMBOL",
+                                        "name": "_newline"
+                                      },
+                                      {
+                                        "type": "BLANK"
+                                      }
+                                    ]
+                                  },
                                   {
                                     "type": "STRING",
                                     "value": "and"
@@ -374,6 +410,10 @@
           ]
         }
       ]
+    },
+    "_newline": {
+      "type": "PATTERN",
+      "value": "\\r?\\n"
     },
     "_fn_decl_generic": {
       "type": "SEQ",
@@ -2097,7 +2137,11 @@
       "name": "line_comment"
     }
   ],
-  "conflicts": [],
+  "conflicts": [
+    [
+      "function_decl"
+    ]
+  ],
   "precedences": [],
   "externals": [
     {
@@ -2110,5 +2154,21 @@
     }
   ],
   "inline": [],
-  "supertypes": []
+  "supertypes": [],
+  "reserved": {
+    "global": [
+      {
+        "type": "STRING",
+        "value": "let"
+      },
+      {
+        "type": "STRING",
+        "value": "struct"
+      },
+      {
+        "type": "STRING",
+        "value": "where"
+      }
+    ]
+  }
 }
