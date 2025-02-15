@@ -418,6 +418,7 @@ module.exports = grammar({
     call: $ => prec(PREC.call, seq(
       field("name", $.identifier),
       "(",
+      optional($._newline),
       optional($.arguments),
       ")"
     )),
@@ -425,10 +426,10 @@ module.exports = grammar({
     //! arguments       →   expression ( "," expression ) *
     arguments: $ => seq(
       $._expression,
-      optional(seq(
+      optional(repeat(nlseq1(
         ",",
         $._expression
-      ))
+      )))
     ),
 
     _parenthesized_expression: $ => seq(

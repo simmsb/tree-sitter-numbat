@@ -148,9 +148,10 @@ Function definition with struct in body
 ================================================================================
 
 fn calc_fb_resistors(
-  a: Voltage, b: Voltage,
-  c: Voltage,
-  d: Voltage) -> ThreeWayDivider =
+  opamp_v_min: Voltage,
+  opamp_v_max: Voltage,
+  v_out_max: Voltage,
+  v_out_min: Voltage) -> ThreeWayDivider =
   ThreeWayDivider {
     r_a: fb_r_a,
     r_b: r_b,
