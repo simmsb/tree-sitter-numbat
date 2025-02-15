@@ -1117,6 +1117,104 @@
     "type": "function_decl",
     "named": true,
     "fields": {
+      "ands": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "=",
+            "named": false
+          },
+          {
+            "type": "and",
+            "named": false
+          },
+          {
+            "type": "boolean",
+            "named": true
+          },
+          {
+            "type": "call",
+            "named": true
+          },
+          {
+            "type": "comparison",
+            "named": true
+          },
+          {
+            "type": "condition",
+            "named": true
+          },
+          {
+            "type": "conversion",
+            "named": true
+          },
+          {
+            "type": "factor",
+            "named": true
+          },
+          {
+            "type": "factorial",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "ifactor",
+            "named": true
+          },
+          {
+            "type": "negate",
+            "named": true
+          },
+          {
+            "type": "number",
+            "named": true
+          },
+          {
+            "type": "per_factor",
+            "named": true
+          },
+          {
+            "type": "postfix_apply",
+            "named": true
+          },
+          {
+            "type": "power",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          },
+          {
+            "type": "term",
+            "named": true
+          },
+          {
+            "type": "type_annotation",
+            "named": true
+          },
+          {
+            "type": "unicode_power",
+            "named": true
+          }
+        ]
+      },
       "body": {
         "multiple": true,
         "required": false,
@@ -1200,7 +1298,7 @@
         ]
       },
       "name": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -1218,6 +1316,10 @@
             "named": false
           },
           {
+            "type": ":",
+            "named": false
+          },
+          {
             "type": "<",
             "named": false
           },
@@ -1228,6 +1330,102 @@
           {
             "type": "identifier",
             "named": true
+          },
+          {
+            "type": "type_annotation",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": "boolean",
+            "named": true
+          },
+          {
+            "type": "call",
+            "named": true
+          },
+          {
+            "type": "comparison",
+            "named": true
+          },
+          {
+            "type": "condition",
+            "named": true
+          },
+          {
+            "type": "conversion",
+            "named": true
+          },
+          {
+            "type": "factor",
+            "named": true
+          },
+          {
+            "type": "factorial",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "ifactor",
+            "named": true
+          },
+          {
+            "type": "negate",
+            "named": true
+          },
+          {
+            "type": "number",
+            "named": true
+          },
+          {
+            "type": "per_factor",
+            "named": true
+          },
+          {
+            "type": "postfix_apply",
+            "named": true
+          },
+          {
+            "type": "power",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          },
+          {
+            "type": "term",
+            "named": true
+          },
+          {
+            "type": "unicode_power",
+            "named": true
+          }
+        ]
+      },
+      "where": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "=",
+            "named": false
           }
         ]
       }
@@ -1936,6 +2134,7 @@
   {
     "type": "source_file",
     "named": true,
+    "root": true,
     "fields": {},
     "children": {
       "multiple": true,
@@ -2647,6 +2846,10 @@
     "named": false
   },
   {
+    "type": "and",
+    "named": false
+  },
+  {
     "type": "assert_eq",
     "named": false
   },
@@ -2748,6 +2951,10 @@
   },
   {
     "type": "use",
+    "named": false
+  },
+  {
+    "type": "where",
     "named": false
   },
   {
